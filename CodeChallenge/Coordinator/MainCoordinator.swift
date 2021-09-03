@@ -2,8 +2,6 @@
 //  MainCoordinator.swift
 //  CodeChallenge
 //
-//  Created by Froy on 8/27/21.
-//
 
 import Foundation
 
@@ -17,10 +15,10 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-
+        // Start app on RedditFeedsViewController file
         let vc = RedditFeedsViewController()
+        // ViewModel file
         vc.viewModel = RedditFeedViewModel()
-       // vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
 

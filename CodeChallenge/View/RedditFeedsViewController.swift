@@ -2,14 +2,13 @@
 //  RedditFeedsViewController.swift
 //  CodeChallenge
 //
-//  Created by Froy on 8/27/21.
-//
 
 import UIKit
 import Combine
 
 class RedditFeedsViewController: UIViewController {
 
+    // Adding a TableView and properties
     lazy var tableView:UITableView = {
        let tableView = UITableView()
         tableView.dataSource = self
@@ -36,6 +35,7 @@ class RedditFeedsViewController: UIViewController {
     private func setupUI() {
         self.view.addSubview(tableView)
 
+        // TableView contraints
         tableView.register(RedditFeedTableViewCell.self, forCellReuseIdentifier: "Cell")
 
         tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:0.0).isActive = true
@@ -50,7 +50,7 @@ class RedditFeedsViewController: UIViewController {
             .feedBinding
             .dropFirst()
             .receive(on: RunLoop.main).sink {[weak self] _ in
-                print("AAA: Reloading Tableview")
+                print("Test: Reloading Tableview")
                 self?.tableView.reloadData()
             }.store(in: &cancellabel)
 
