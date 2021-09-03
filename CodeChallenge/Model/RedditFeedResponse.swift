@@ -34,177 +34,19 @@ struct Child: Codable {
 
 // MARK: - ChildData
 struct ChildData: Codable {
-//    let subreddit, selftext, authorFullname: String
-//    let saved: Bool
-//    let gilded: Int
-//    let clicked: Bool
-//    let title: String
-//    let linkFlairRichtext: [FlairRichtext]
-//    let subredditNamePrefixed: String
-//    let hidden: Bool
-//    let pwls: Int
-//    let linkFlairCSSClass: String?
-//    let downs: Int
-//    let thumbnailHeight: Int?
-//    let topAwardedType: String?
-//    let hideScore: Bool
-//    let name: String
-//    let quarantine: Bool
-//    let linkFlairTextColor: FlairTextColor
-//    let upvoteRatio: Double
-//    let authorFlairBackgroundColor: String?
-//    let subredditType: SubredditType
-//    let ups, totalAwardsReceived: Int
-//    let mediaEmbed: MediaEmbed
-//    let thumbnailWidth: Int?
-//    let authorFlairTemplateID: String?
-//    let isOriginalContent: Bool
-//    let secureMedia: Media?
-//    let isRedditMediaDomain, isMeta: Bool
-//    let secureMediaEmbed: MediaEmbed
-//    let linkFlairText: String?
-//    let canModPost: Bool
-//    let score: Int
-//    let isCreatedFromAdsUI, authorPremium: Bool
-//    let thumbnail: String
-//    let edited: Edited
-//    let authorFlairCSSClass: String?
-//    let authorFlairRichtext: [FlairRichtext]
-//    let gildings: Gildings
-//    let postHint: PostHint?
-//    let isSelf: Bool
-//    let created: Int
-//    let linkFlairType: FlairType
-//    let wls: Int
-//    let authorFlairType: FlairType
-//    let domain: String
-//    let allowLiveComments: Bool
-//    let selftextHTML: String?
-//    let suggestedSort: String?
-//    let urlOverriddenByDest: String?
-//    let archived, noFollow, isCrosspostable, pinned: Bool
-//    let over18: Bool
-//    let preview: Preview?
-//    let allAwardings: [AllAwarding]
-//    let mediaOnly, canGild, spoiler, locked: Bool
-//    let authorFlairText: String?
-//    let visited: Bool
-//    let distinguished: String?
-//    let subredditID: String
-//    let authorIsBlocked: Bool
-//    let linkFlairBackgroundColor, id: String
-//    let isRobotIndexable: Bool
-//    let author: String
-//    let numComments: Int
-//    let sendReplies: Bool
-//    let whitelistStatus: WhitelistStatus
-//    let contestMode: Bool
-//    let authorPatreonFlair: Bool
-//    let authorFlairTextColor: FlairTextColor?
-//    let permalink: String
-//    let parentWhitelistStatus: WhitelistStatus
-//    let stickied: Bool
-//    let url: String
-//    let subredditSubscribers, createdUTC, numCrossposts: Int
-//    let media: Media?
-//    let isVideo: Bool
-//    let linkFlairTemplateID: String?
-//    let isGallery: Bool?
-//    let mediaMetadata: [String: MediaMetadatum]?
-//    let galleryData: GalleryData?
+    let title: String
+    let thumbnailWidth: Int?
+    let score: Int
+    let thumbnail: String
+    let numComments: Int
 
-//    enum CodingKeys: String, CodingKey {
-//        case approvedAtUTC = "approved_at_utc"
-//        case subreddit, selftext
-//        case authorFullname = "author_fullname"
-//        case saved
-//        case gilded, clicked, title
-//        case linkFlairRichtext = "link_flair_richtext"
-//        case subredditNamePrefixed = "subreddit_name_prefixed"
-//        case hidden, pwls
-//        case linkFlairCSSClass = "link_flair_css_class"
-//        case downs
-//        case thumbnailHeight = "thumbnail_height"
-//        case topAwardedType = "top_awarded_type"
-//        case hideScore = "hide_score"
-//        case name, quarantine
-//        case linkFlairTextColor = "link_flair_text_color"
-//        case upvoteRatio = "upvote_ratio"
-//        case authorFlairBackgroundColor = "author_flair_background_color"
-//        case subredditType = "subreddit_type"
-//        case ups
-//        case totalAwardsReceived = "total_awards_received"
-//        case mediaEmbed = "media_embed"
-//        case thumbnailWidth = "thumbnail_width"
-//        case authorFlairTemplateID = "author_flair_template_id"
-//        case isOriginalContent = "is_original_content"
-//        case userReports = "user_reports"
-//        case secureMedia = "secure_media"
-//        case isRedditMediaDomain = "is_reddit_media_domain"
-//        case isMeta = "is_meta"
-//        case secureMediaEmbed = "secure_media_embed"
-//        case linkFlairText = "link_flair_text"
-//        case canModPost = "can_mod_post"
-//        case score
-//        case isCreatedFromAdsUI = "is_created_from_ads_ui"
-//        case authorPremium = "author_premium"
-//        case thumbnail, edited
-//        case authorFlairCSSClass = "author_flair_css_class"
-//        case authorFlairRichtext = "author_flair_richtext"
-//        case gildings
-//        case postHint = "post_hint"
-//        case isSelf = "is_self"
-//        case created
-//        case linkFlairType = "link_flair_type"
-//        case wls
-//        case authorFlairType = "author_flair_type"
-//        case domain
-//        case allowLiveComments = "allow_live_comments"
-//        case selftextHTML = "selftext_html"
-//        case suggestedSort = "suggested_sort"
-//        case urlOverriddenByDest = "url_overridden_by_dest"
-//        case archived
-//        case noFollow = "no_follow"
-//        case isCrosspostable = "is_crosspostable"
-//        case pinned
-//        case over18 = "over_18"
-//        case preview
-//        case allAwardings = "all_awardings"
-//        case awarders
-//        case mediaOnly = "media_only"
-//        case canGild = "can_gild"
-//        case spoiler, locked
-//        case authorFlairText = "author_flair_text"
-//        case treatmentTags = "treatment_tags"
-//        case visited
-//        case removedBy = "removed_by"
-//        case distinguished
-//        case subredditID = "subreddit_id"
-//        case authorIsBlocked = "author_is_blocked"
-//        case linkFlairBackgroundColor = "link_flair_background_color"
-//        case id
-//        case isRobotIndexable = "is_robot_indexable"
-//        case author
-//        case numComments = "num_comments"
-//        case sendReplies = "send_replies"
-//        case whitelistStatus = "whitelist_status"
-//        case contestMode = "contest_mode"
-//        case modReports = "mod_reports"
-//        case authorPatreonFlair = "author_patreon_flair"
-//        case authorFlairTextColor = "author_flair_text_color"
-//        case permalink
-//        case parentWhitelistStatus = "parent_whitelist_status"
-//        case stickied, url
-//        case subredditSubscribers = "subreddit_subscribers"
-//        case createdUTC = "created_utc"
-//        case numCrossposts = "num_crossposts"
-//        case media
-//        case isVideo = "is_video"
-//        case linkFlairTemplateID = "link_flair_template_id"
-//        case isGallery = "is_gallery"
-//        case mediaMetadata = "media_metadata"
-//        case galleryData = "gallery_data"
-//    }
+    enum CodingKeys: String, CodingKey {
+        case title
+        case thumbnailWidth = "thumbnail_width"
+        case score
+        case thumbnail
+        case numComments = "num_comments"
+    }
 }
 
 // MARK: - AllAwarding

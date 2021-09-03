@@ -13,13 +13,14 @@ class RedditFeedsViewController: UIViewController {
     lazy var tableView:UITableView = {
        let tableView = UITableView()
         tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.delegate = self
+        tableView.prefetchDataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(RedditFeedTableViewCell.self, forCellReuseIdentifier: RedditFeedTableViewCell.identifier)
         return tableView
     }()
 
-
-    var viewModel:RedditFeedViewModelType!
+    var viewModel:RedditFeedViewModelType?
 
     private var cancellabel = Set<AnyCancellable>()
 
@@ -30,7 +31,7 @@ class RedditFeedsViewController: UIViewController {
         setupUI()
 
         configureDataBinding()
-        viewModel.getRedditFeeds()
+        viewModel?.getRedditFeeds()
     }
 
     private func setupUI() {
@@ -46,40 +47,63 @@ class RedditFeedsViewController: UIViewController {
     }
 
     private func configureDataBinding() {
-        viewModel
+        viewModel?
             .feedBinding
             .dropFirst()
             .receive(on: RunLoop.main).sink {[weak self] _ in
+                print("AAA: Reloading Tableview")
                 self?.tableView.reloadData()
             }.store(in: &cancellabel)
 
-        viewModel
+        viewModel?
             .errorBinding
             .dropFirst()
             .receive(on: RunLoop.main).sink {[weak self] _ in
               //  self?.showAlert()
             }.store(in: &cancellabel)
+        
+//        viewModel?
+//            .rowToUpdateBinding
+//            .dropFirst()
+//            .receive(on: RunLoop.main)
+//            .sink { [weak self] row in
+//                self?.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+//            }
+//            .store(in: &cancellabel)
     }
 
 }
 
 extension RedditFeedsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
+        return viewModel?.numberOfItems ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier:"Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RedditFeedTableViewCell.identifier, for: indexPath) as? RedditFeedTableViewCell
+        else { return UITableViewCell() }
 
-        cell.textLabel?.text = "\(indexPath.row)"
+        let row = indexPath.row
+        let title = viewModel?.getTitle(at: row)
+        let comment = viewModel?.getCommentNumber(at: row)
+        let score = viewModel?.getScore(at: row)
+        let imageData = viewModel?.getImageData(at: row)
+        cell.configureCell(title: title, commentNumber: comment, score: score, imageData: imageData)
         return cell
     }
 
 
 }
 
-extension RedditFeedsViewController: UITableViewDelegate {
+extension RedditFeedsViewController: UITableViewDataSourcePrefetching {
 
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        let lastIndexPath = IndexPath(row: (viewModel?.numberOfItems ?? 1) - 1, section: 0)
+        guard indexPaths.contains(lastIndexPath) else { return }
+        viewModel?.getRedditFeeds()
+    }
+    
 }
 

@@ -8,6 +8,7 @@
 import Foundation
 
 typealias Completion<T:Decodable> =  ((Result<T, NetworkError>) -> Void)
+typealias CompletionData =  ((Result<Data, NetworkError>) -> Void)
 
 class BaseRepository {
     var networkManager:Networkable

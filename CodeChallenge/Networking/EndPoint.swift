@@ -9,5 +9,5 @@ import Foundation
 
 
 enum EndPoint {
-    static let baseUrl = "https://www.reddit.com/.json"
+    static let baseUrl = "https://www.reddit.com/.json?after="
 }
