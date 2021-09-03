@@ -13,7 +13,6 @@ class RedditFeedsViewController: UIViewController {
     lazy var tableView:UITableView = {
        let tableView = UITableView()
         tableView.dataSource = self
-//        tableView.delegate = self
         tableView.prefetchDataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(RedditFeedTableViewCell.self, forCellReuseIdentifier: RedditFeedTableViewCell.identifier)
@@ -61,15 +60,6 @@ class RedditFeedsViewController: UIViewController {
             .receive(on: RunLoop.main).sink {[weak self] _ in
               //  self?.showAlert()
             }.store(in: &cancellabel)
-        
-//        viewModel?
-//            .rowToUpdateBinding
-//            .dropFirst()
-//            .receive(on: RunLoop.main)
-//            .sink { [weak self] row in
-//                self?.tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
-//            }
-//            .store(in: &cancellabel)
     }
 
 }
